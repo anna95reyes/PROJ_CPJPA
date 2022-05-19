@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd" version="2.2">
+    <entity class="org.milaifontanals.model.Entrada" access="FIELD" metadata-complete="true">
+        <table name="entrada">
+        </table>
+        <attributes>
+            <id name="numero">
+                <column name="entr_numeracio"/>
+            </id>
+            <basic name="data" >
+                <column name="entr_data"/>
+                <temporal>DATE</temporal>
+            </basic>
+            <basic name="entrada" >
+                <column name="entr_entrada"/>
+            </basic>
+            <many-to-one name="escriptor" fetch="LAZY">
+                <join-column name="usu_escrita_per"/>
+                <cascade>
+                    <cascade-persist/>
+                </cascade>
+            </many-to-one>
+            <many-to-one name="novaAssignacio" fetch="LAZY">
+                <join-column name="usu_nova_assignacio"/>
+                <cascade>
+                    <cascade-persist/>
+                </cascade>
+            </many-to-one>
+            <many-to-one name="nouEstat" fetch="LAZY">
+                <join-column name="stat_id"/>
+                <cascade>
+                    <cascade-persist/>
+                </cascade>
+            </many-to-one>
+        </attributes>
+    </entity>
+
+</entity-mappings>

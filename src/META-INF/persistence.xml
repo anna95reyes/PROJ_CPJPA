@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">    
+    <persistence-unit name="UP-GestorProjectes-Hibernate" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <mapping-file>META-INF/projecte.xml</mapping-file>
+        <mapping-file>META-INF/usuari.xml</mapping-file>
+        <mapping-file>META-INF/tasca.xml</mapping-file>
+        <mapping-file>META-INF/entrada.xml</mapping-file>
+        <mapping-file>META-INF/projecte_usuari.xml</mapping-file>
+        <mapping-file>META-INF/rol.xml</mapping-file>
+        <mapping-file>META-INF/estat.xml</mapping-file>
+        <class>org.milaifontanals.model.Projecte</class>
+        <class>org.milaifontanals.model.Usuari</class>  
+        <class>org.milaifontanals.model.Tasca</class>  
+        <class>org.milaifontanals.model.Entrada</class>  
+        <class>org.milaifontanals.model.ProjecteUsuariRol</class>      
+        <class>org.milaifontanals.model.Rol</class>  
+        <class>org.milaifontanals.model.Estat</class>    
+        <properties>
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd" version="2.2">
+    <entity class="org.milaifontanals.model.Tasca" access="FIELD" metadata-complete="true">
+        <table name="tasca">
+        </table>
+        <attributes>
+            <id name="id">
+                <column name="tasc_id"/>
+            </id>
+            <basic name="dataCreacio" >
+                <column name="tasc_data_creacio"/>
+                <temporal>DATE</temporal>
+            </basic>
+            <basic name="nom" >
+                <column name="tasc_nom"/>
+            </basic>
+            <basic name="descripcio" >
+                <column name="tasc_descripcio"/>
+            </basic>
+            <basic name="dataLimit" >
+                <column name="tasc_data_limit"/>
+                <temporal>DATE</temporal>
+            </basic>
+            <many-to-one name="propietari" fetch="LAZY">
+                <join-column name="usu_creada_per"/>
+                <cascade>
+                    <cascade-persist/>
+                </cascade>
+            </many-to-one>
+            <many-to-one name="responsable" fetch="LAZY">
+                <join-column name="usu_assignada_a"/>
+                <cascade>
+                    <cascade-persist/>
+                </cascade>
+            </many-to-one>
+            <many-to-one name="estat" fetch="LAZY">
+                <join-column name="stat_id"/>
+                <cascade>
+                    <cascade-persist/>
+                </cascade>
+            </many-to-one>
+            <element-collection name="entrades">
+                <collection-table name="entrada">
+                    <join-column name="tasc_id"/>
+                </collection-table>
+            </element-collection> 
+        </attributes>
+    </entity>
+
+</entity-mappings>

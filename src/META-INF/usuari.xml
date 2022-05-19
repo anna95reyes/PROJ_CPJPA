@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd" version="2.2">
+    <entity class="org.milaifontanals.model.Usuari" access="FIELD" metadata-complete="true">
+        <table name="usuari">
+        </table>
+        <attributes>
+            <id name="id">
+                <column name="usu_id"/>
+            </id>
+            <basic name="nom">
+                <column name="usu_nom"/>
+            </basic>
+            <basic name="cognom1">
+                <column name="usu_cognom_1"/>
+            </basic>
+            <basic name="cognom2">
+                <column name="usu_cognom_2"/>
+            </basic>
+            <basic name="dataNaixement">
+                <column name="usu_data_naixement"/>
+                <temporal>DATE</temporal>
+            </basic>
+            <basic name="login">
+                <column name="usu_login"/>
+            </basic>
+            <basic name="passwrdHash">
+                <column name="usu_password_hash"/>
+            </basic>
+            <one-to-many name="projectesRol" mapped-by="usuari"/>
+            <element-collection name="tasquesAssignades">
+                <collection-table name="tasca">
+                    <join-column name="usu_assignada_a"/>
+                </collection-table>
+            </element-collection> 
+        </attributes>
+    </entity>
+
+</entity-mappings>

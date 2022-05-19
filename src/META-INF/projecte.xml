@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd" version="2.2">
+    <entity class="org.milaifontanals.model.Projecte" access="FIELD" metadata-complete="true">
+        <table name="projecte">
+        </table>
+        <attributes>
+            <id name="id">
+                <column name="proj_id"/>
+            </id>
+            <basic name="nom">
+                <column name="proj_nom"/>
+            </basic>
+            <basic name="descripcio">
+                <column name="proj_descripcio"/>
+            </basic>
+            <many-to-one name="capProjecte" fetch="LAZY">
+                <join-column name="usu_cap_projecte"/>
+                <cascade>
+                    <cascade-persist/>
+                </cascade>
+            </many-to-one>
+            <one-to-many name="usuarisRol" mapped-by="projecte"/>
+            <element-collection name="tasques">
+                <collection-table name="tasca">
+                    <join-column name="proj_id"/>
+                </collection-table>
+            </element-collection> 
+        </attributes>
+    </entity>
+
+</entity-mappings>
+
