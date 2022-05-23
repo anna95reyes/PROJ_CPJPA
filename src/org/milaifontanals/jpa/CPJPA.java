@@ -8,6 +8,7 @@ package org.milaifontanals.jpa;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Properties;
 import javax.persistence.EntityManager;
@@ -24,7 +25,7 @@ import org.milaifontanals.model.Usuari;
  */
 public class CPJPA implements IGestioProjectes {
     private EntityManager em;
-
+    
     public CPJPA() throws GestioProjectesException {
         this("CPJPA.properties");
     }
