@@ -43,7 +43,7 @@
                 <collection-table name="entrada">
                     <join-column name="tasc_id"/>
                 </collection-table>
-            </element-collection> 
+            </element-collection>
         </attributes>
     </entity>
 

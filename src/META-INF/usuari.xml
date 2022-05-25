@@ -27,11 +27,7 @@
                 <column name="usu_password_hash"/>
             </basic>
             <one-to-many name="projectesRol" mapped-by="usuari"/>
-            <element-collection name="tasquesAssignades">
-                <collection-table name="tasca">
-                    <join-column name="usu_assignada_a"/>
-                </collection-table>
-            </element-collection> 
+            <one-to-many name="tasquesAssignades" mapped-by="responsable"/>
         </attributes>
     </entity>
 
