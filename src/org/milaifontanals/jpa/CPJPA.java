@@ -127,7 +127,7 @@ public class CPJPA implements IGestioProjectes {
         if (existeixUsuari(usuari.getId())){
             usu.setNom(usuari.getNom());
             usu.setCognom1(usuari.getCognom1());
-            usu.setCognom2(usuari.getCognom1());
+            usu.setCognom2(usuari.getCognom2());
             usu.setDataNaixement(usuari.getDataNaixement());
             usu.setLogin(usuari.getLogin());
             usu.setPasswrdHash(usuari.getPasswrdHash());
@@ -180,7 +180,22 @@ public class CPJPA implements IGestioProjectes {
 
     @Override
     public List<Projecte> getLlistaProjectesNoAssignats(Usuari usuari) throws GestioProjectesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (existeixUsuari(usuari.getId())){
+             Query query = em.createQuery("select distinct p "
+                        + "from ProjecteUsuariRol pur right join pur.projecte p"
+                        + " where pur.usuari is null or p not in (select p "
+                                + "from ProjecteUsuariRol pur join pur.projecte p "
+                                + "where pur.usuari = :pUsuari)", Projecte.class);
+            
+            query.setParameter("pUsuari", usuari);
+            List<Projecte> projectes = query.getResultList();
+            for (Projecte proj: projectes) {
+                hmProjectesNoAssignats.put(proj.getId(), proj);
+            }
+            return projectes;
+        } else {
+            throw new GestioProjectesException("L'usuari no existeix");
+        }
     }
 
     @Override
