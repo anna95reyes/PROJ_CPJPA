@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -164,7 +165,17 @@ public class CPJPA implements IGestioProjectes {
     
     @Override
     public List<Projecte> getLlistaProjectesAssignats(Usuari usuari) throws GestioProjectesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (existeixUsuari(usuari.getId())){
+            Query query = em.createQuery("select pur.projecte from ProjecteUsuariRol pur where pur.usuari = :pUsuari", Projecte.class);
+            query.setParameter("pUsuari", usuari);
+            List<Projecte> projectes = query.getResultList();
+            for (Projecte proj: projectes) {
+                hmProjectesAssignats.put(proj.getId(), proj);
+            }
+            return projectes;
+        } else {
+            throw new GestioProjectesException("L'usuari no existeix");
+        }
     }
 
     @Override
