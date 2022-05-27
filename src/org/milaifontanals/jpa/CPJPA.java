@@ -8,6 +8,9 @@ package org.milaifontanals.jpa;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,7 +133,7 @@ public class CPJPA implements IGestioProjectes {
             usu.setCognom2(usuari.getCognom2());
             usu.setDataNaixement(usuari.getDataNaixement());
             usu.setLogin(usuari.getLogin());
-            usu.setPasswrdHash(usuari.getPasswrdHash());
+            usu.setPasswordHash(usuari.getPasswordHash());
             hmUsuaris.put(usuari.getId(), usuari);
         } else {
             throw new GestioProjectesException("L'usuari que intentas modificar no existeix");
@@ -214,7 +217,7 @@ public class CPJPA implements IGestioProjectes {
     public void desassignarProjecte(Usuari usuari, Projecte projecte) throws GestioProjectesException {
         if (existeixUsuari(usuari.getId()) && existeixProjecte(projecte.getId())){
             ProjecteUsuariRol pur = new ProjecteUsuariRol(projecte, usuari, getRol(1));
-            em.remove(pur);
+            em.remove(em.merge(pur));
             hmProjectesAssignats.remove(projecte);
             hmProjectesNoAssignats.put(projecte.getId(), projecte);
         } else {
@@ -292,6 +295,34 @@ public class CPJPA implements IGestioProjectes {
             em.getTransaction().rollback();
         } catch (Exception ex) {
             throw new GestioProjectesException("Error en fer rollback.", ex);
+        }
+    }
+
+    @Override
+    public String hashMD5(String input) throws GestioProjectesException {
+        try {
+  
+            // Static getInstance method is called with hashing MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+  
+            // digest() method is called to calculate message digest
+            //  of an input digest() return array of byte
+            byte[] messageDigest = md.digest(input.getBytes());
+  
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
+  
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } 
+  
+        // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
     
