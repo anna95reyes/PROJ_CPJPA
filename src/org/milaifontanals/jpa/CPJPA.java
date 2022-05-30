@@ -37,7 +37,7 @@ public class CPJPA implements IGestioProjectes {
     private HashMap<Integer, Usuari> hmUsuaris = new HashMap();
     private HashMap<Integer, Projecte> hmProjectesAssignats = new HashMap();
     private HashMap<Integer, Projecte> hmProjectesNoAssignats = new HashMap();
-    private Rol rol;
+    private HashMap<Integer, Rol> hmRols = new HashMap();
     
     private EntityManager em;
     
@@ -202,9 +202,9 @@ public class CPJPA implements IGestioProjectes {
     }
 
     @Override
-    public void assignarProjecte(Usuari usuari, Projecte projecte) throws GestioProjectesException {
+    public void assignarProjecte(Usuari usuari, Projecte projecte, Rol rol) throws GestioProjectesException {
         if (existeixUsuari(usuari.getId()) && existeixProjecte(projecte.getId())){
-            ProjecteUsuariRol pur = new ProjecteUsuariRol(projecte, usuari, getRol(1));
+            ProjecteUsuariRol pur = new ProjecteUsuariRol(projecte, usuari, rol);
             em.persist(pur);
             hmProjectesAssignats.put(projecte.getId(), projecte);
             hmProjectesNoAssignats.remove(projecte);
@@ -226,17 +226,38 @@ public class CPJPA implements IGestioProjectes {
     }
     
     @Override
+    public List<Rol> getLlistaRols() throws GestioProjectesException {
+        Query query = em.createQuery("select r from Rol r", Rol.class);
+        List<Rol> rols = query.getResultList();
+        for (Rol r: rols) {
+            hmRols.put(r.getId(), r);
+        }
+        return rols;
+    }
+    
+    @Override
     public Rol getRol(int id) throws GestioProjectesException {
         if (id <= 0 || id > Integer.MAX_VALUE) {
             throw new GestioProjectesException("Intent de cercar un rol amb id " + id + " inadequat");
         }
+        Rol rol = hmRols.get(id);
         if (rol != null){
             return rol;
         }
         
         rol = em.find(Rol.class, (int) id);
+        hmRols.put(id, rol);
         
         return rol;
+    }
+    
+    public Rol getRolAssignat (Usuari usuari, Projecte projecte) throws GestioProjectesException {
+        Query query = em.createQuery("select pur.rol from ProjecteUsuariRol pur "
+                + "where pur.usuari = :pUsuari and pur.projecte = :pProjecte", Rol.class);
+        query.setParameter("pUsuari", usuari);
+        query.setParameter("pProjecte", projecte);
+        
+        return (Rol)query.getSingleResult();
     }
     
     @Override
