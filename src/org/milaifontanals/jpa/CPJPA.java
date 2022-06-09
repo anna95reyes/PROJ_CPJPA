@@ -346,5 +346,10 @@ public class CPJPA implements IGestioProjectes {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public String Login(String login, String password) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
