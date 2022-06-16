@@ -22,9 +22,12 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import org.milaifontanals.interficie.GestioProjectesException;
 import org.milaifontanals.interficie.IGestioProjectes;
+import org.milaifontanals.model.Entrada;
+import org.milaifontanals.model.Estat;
 import org.milaifontanals.model.Projecte;
 import org.milaifontanals.model.ProjecteUsuariRol;
 import org.milaifontanals.model.Rol;
+import org.milaifontanals.model.Tasca;
 import org.milaifontanals.model.Usuari;
 
 /**
@@ -349,6 +352,66 @@ public class CPJPA implements IGestioProjectes {
 
     @Override
     public String Login(String login, String password) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Projecte> getLlistaProjectes(String sessionId) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Tasca> getLlistaTasquesAssignades(String sessionId, Integer idEstat, Integer idProjecte) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Estat getEstat(int id) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Estat> getLlistaEstats(String sessionId) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Tasca getTasca(int id) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Entrada> getLlistaEntrades(String sessionId, Integer idTasca) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Usuari> getLlistaUsuaris(String sessionId) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Entrada getEntrada(int idTasca, int idEntrada) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Usuari getUsuari(String sessionId) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void afegirEntrada(int idTasca, Entrada entrada) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void modificarEntrada(int idTasca, Entrada entrada) throws GestioProjectesException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Integer nextNumeracioEntrada(Integer idTasca) throws GestioProjectesException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
